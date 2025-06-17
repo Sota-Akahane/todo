@@ -11,15 +11,16 @@
       <label for="title">名前</label
       ><input type="text" name="title" id="title" /><br />
       <label for="description">説明</label
-      ><input type="text" name="description" id="description" />
+      ><input type="text" name="description" id="description" /><br />
+      <button type="submit">登録</button>
     </form>
     <form action="todoList.html" method="post">
       <table>
-        <tr>
-          <td>title</td>
-          <td>description</td>
+        <tr th:each="todo : ${todoList}">
+          <td th:text="${todo.title}">title</td>
+          <td th:text="${todo.description}">description</td>
           <td>
-            <input type="checkbox" name="done" id="done" checked="false" />
+            <input type="checkbox" name="done" id="done" />
           </td>
           <td>
             <button type="button">削除</button>
