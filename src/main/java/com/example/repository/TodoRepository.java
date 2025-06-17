@@ -6,12 +6,16 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Todosテーブルを操作するためのリポジトリクラスです.
  *
  * @author sota-akahane
  */
+@Repository
 public class TodoRepository {
     @Autowired
     private NamedParameterJdbcTemplate template;
@@ -24,6 +28,19 @@ public class TodoRepository {
         todo.setDone(rs.getBoolean("done"));
         return todo;
     };
+
+    /**
+     * タスク一覧を取得します.
+     *
+     * @return タスク一覧
+     */
+    public List<Todo> findAll() {
+        String sql = """
+                SELECT id, title, description, done FROM todos
+                """;
+
+        return template.query(sql, TODO_ROW_MAPPER);
+    }
 
     /**
      * タスクを登録します.
@@ -39,7 +56,8 @@ public class TodoRepository {
         SqlParameterSource param
                 = new MapSqlParameterSource()
                 .addValue("title", title)
-                .addValue("description", description);
+                .addValue("description", description)
+                .addValue("done", false);
 
         template.update(sql, param);
     }
