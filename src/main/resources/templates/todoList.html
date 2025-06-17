@@ -6,7 +6,13 @@
   </head>
   <body>
     <h2>Todo List</h2>
-    タスクを追加：<input type="text" name="add-todo" id="add -todo" /><br />
+    <form action="todoList.html" th:action="@{/addTodo}" method="post">
+      タスクを追加：<br />
+      <label for="title">名前</label
+      ><input type="text" name="title" id="title" /><br />
+      <label for="description">説明</label
+      ><input type="text" name="description" id="description" />
+    </form>
     <form action="todoList.html" method="post">
       <table>
         <tr>
