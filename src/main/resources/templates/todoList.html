@@ -2,7 +2,7 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>Title</title>
+    <title>Todo List</title>
   </head>
   <body>
     <h2>Todo List</h2>
@@ -17,10 +17,10 @@
     <form action="todoList.html" method="post">
       <table>
         <tr th:each="todo : ${todoList}">
-          <td th:text="${todo.title}">title</td>
-          <td th:text="${todo.description}">description</td>
+          <td th:text="${todo.title}" class="title">title</td>
+          <td th:text="${todo.description}" class="description">description</td>
           <td>
-            <input type="checkbox" name="done" id="done" />
+            <input type="checkbox" name="done" class="done" />
           </td>
           <td>
             <button type="button">削除</button>
@@ -29,4 +29,7 @@
       </table>
     </form>
   </body>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script th:src="@{/js/check.js}"></script>
 </html>
