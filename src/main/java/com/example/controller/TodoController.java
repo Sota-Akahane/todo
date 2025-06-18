@@ -33,6 +33,14 @@ public class TodoController {
     public String addTodo(String title, String description, Model model) {
         todoService.addTodo(title, description);
 
+        return "redirect:/showTodoList";
+    }
+
+    @PostMapping("/deleteTodo")
+    public String delete(String id, Model model) {
+        int intId = Integer.parseInt(id);
+        todoService.delete(intId);
+
         return showTodoList(model);
     }
 }

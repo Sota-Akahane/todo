@@ -37,4 +37,13 @@ public class TodoService {
     public void addTodo(String title, String description) {
         todoRepository.addTodo(title, description);
     }
+
+    /**
+     * タスクを削除します.
+     *
+     * @param id タスクID
+     */
+    public void delete(Integer id) {
+        todoRepository.delete(id);
+    }
 }

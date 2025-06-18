@@ -61,4 +61,20 @@ public class TodoRepository {
 
         template.update(sql, param);
     }
+
+    /**
+     * タスクを削除します.
+     *
+     * @param id タスクID
+     */
+    public void delete(Integer id) {
+        String sql = """
+                DELETE FROM todos WHERE id = :id
+                """;
+
+        SqlParameterSource param
+                = new MapSqlParameterSource().addValue("id", id);
+
+        template.update(sql, param);
+    }
 }
