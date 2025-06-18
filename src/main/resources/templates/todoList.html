@@ -14,20 +14,24 @@
       ><input type="text" name="description" id="description" /><br />
       <button type="submit">登録</button>
     </form>
-    <form action="todoList.html" method="post">
-      <table>
-        <tr th:each="todo : ${todoList}">
+    <table>
+      <tr th:each="todo : ${todoList}">
+        <form
+          action="todoList.html"
+          th:action="@{/deleteTodo?id=} + ${todo.id}"
+          method="post"
+        >
           <td th:text="${todo.title}" class="title">title</td>
           <td th:text="${todo.description}" class="description">description</td>
           <td>
             <input type="checkbox" name="done" class="done" />
           </td>
           <td>
-            <button type="button">削除</button>
+            <button>削除</button>
           </td>
-        </tr>
-      </table>
-    </form>
+        </form>
+      </tr>
+    </table>
   </body>
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
