@@ -6,13 +6,35 @@
     <title>Todo List</title>
   </head>
   <body>
-    <h2>Todo List</h2>
-    <form action="todoList.html" th:action="@{/addTodo}" method="post">
-      タスクを追加：<br />
-      <label for="title">名前</label
-      ><input type="text" name="title" id="title" /><br />
-      <label for="description">説明</label
-      ><input type="text" name="description" id="description" /><br />
+    <h1>Todo List</h1>
+    <form
+      action="todoList.html"
+      th:action="@{/addTodo}"
+      method="post"
+      th:object="${todoForm}"
+    >
+      <label for="title">名前</label>
+      <div class="error-message" th:errors="*{title}">
+        タスクを入力してください
+      </div>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        placeholder="タスクのタイトル"
+        th:field="*{title}"
+      /><br />
+      <label for="description">説明</label>
+      <div class="error-message" th:errors="*{description}">
+        説明は150文字以内で入力してください
+      </div>
+      <input
+        type="text"
+        name="description"
+        id="description"
+        placeholder="タスクの説明"
+        th:field="*{description}"
+      /><br />
       <button type="submit">登録</button>
     </form>
     <table>
@@ -22,8 +44,10 @@
           th:action="@{/deleteTodo?id=} + ${todo.id}"
           method="post"
         >
-          <td th:text="${todo.title}" class="title">title</td>
-          <td th:text="${todo.description}" class="description">description</td>
+          <td th:text="${todo.title}" class="title">算数の宿題をする</td>
+          <td th:text="${todo.description}" class="description">
+            算数ワークp10~15
+          </td>
           <td>
             <input type="checkbox" name="done" class="done" />
           </td>
