@@ -11,12 +11,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Todosテーブルを操作するためのリポジトリクラスです.
+ * todosテーブルを操作するためのリポジトリクラスです.
  *
  * @author sota-akahane
  */
 @Repository
 public class TodoRepository {
+
     @Autowired
     private NamedParameterJdbcTemplate template;
 
@@ -36,7 +37,7 @@ public class TodoRepository {
      */
     public List<Todo> findAll() {
         String sql = """
-                SELECT id, title, description, done FROM todos
+                SELECT id,title,description,done FROM todos
                 """;
 
         return template.query(sql, TODO_ROW_MAPPER);
@@ -50,7 +51,7 @@ public class TodoRepository {
      */
     public void addTodo(String title, String description) {
         String sql = """
-                INSERT INTO todos(title, description, done) VALUES (:title, :description, :done)
+                INSERT INTO todos(title,description,done) VALUES (:title,:description,:done)
                 """;
 
         SqlParameterSource param
@@ -69,7 +70,7 @@ public class TodoRepository {
      */
     public void delete(Integer id) {
         String sql = """
-                DELETE FROM todos WHERE id = :id
+                DELETE FROM todos WHERE id=:id
                 """;
 
         SqlParameterSource param
